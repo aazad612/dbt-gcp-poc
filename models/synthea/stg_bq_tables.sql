@@ -10,3 +10,4 @@ SELECT
     creation_time,
     is_insertable_into
 FROM `{{ target.database }}`.`region-{{ target.location | lower }}`.INFORMATION_SCHEMA.TABLES
+-- v2

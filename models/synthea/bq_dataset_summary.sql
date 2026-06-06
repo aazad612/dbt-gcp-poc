@@ -10,3 +10,4 @@ SELECT
 FROM {{ ref('stg_bq_tables') }}
 GROUP BY 1
 ORDER BY 1
+-- v2

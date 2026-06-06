@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: stg_bq_tables
+    description: >
+      Staging table pulling all objects from BigQuery INFORMATION_SCHEMA.TABLES
+      at the project level. Materialised as a table in dev_dbt_syn / test_dbt_syn.
+    columns:
+      - name: table_catalog
+        description: GCP project ID
+      - name: table_schema
+        description: BigQuery dataset name
+      - name: table_name
+        description: Table or view name
+      - name: table_type
+        description: BASE TABLE or VIEW
+      - name: creation_time
+        description: When the object was created
+      - name: is_insertable_into
+        description: Whether the table supports INSERT
+
+  - name: bq_dataset_summary
+    description: >
+      View summarising table/view counts and total size per dataset.
+      Built on top of stg_bq_tables. Materialised as a view in dev_dbt_syn / test_dbt_syn.
+    columns:
+      - name: dataset_name
+        description: BigQuery dataset name
+      - name: total_objects
+        description: Total number of tables and views in the dataset
+      - name: table_count
+        description: Number of BASE TABLE objects
+      - name: view_count
+        description: Number of VIEW objects
+      - name: total_row_count
+        description: Sum of row counts across all tables

@@ -37,6 +37,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 models:
   my_new_project:
-    # Applies to all files under models/example/
     example:
       +materialized: table
+    synthea:
+      +schema: "{% if target.name == 'prod' %}prod_dbt_syn{% elif target.name == 'staging' %}test_dbt_syn{% else %}dev_dbt_syn{% endif %}"
